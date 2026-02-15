@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     username: {
         type: String,
-        required: true
+        required: [true, "Username is required"], 
+        unique: true,   // Prevents duplicate usernames
+        trim: true,     // REMOVES MESS: " Dave " becomes "Dave" automatically
+        minlength: 3    // Prevents "a" or "ab" as usernames
     },
     roles: {
         User: {
@@ -17,8 +20,11 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
+        // select: false  <-- COMMENTED OUT FOR NOW (To avoid confusion in Login)
     },
-    refreshToken: String
+    refreshToken: String // Keeping it simple (One device per user for now)
+}, {
+    timestamps: true // ADDS VALUE: Auto-adds 'createdAt' and 'updatedAt'
 });
 
 module.exports = mongoose.model('User', userSchema);
