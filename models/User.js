@@ -7,7 +7,7 @@ const userSchema = new Schema({
         required: [true, "Username is required"], 
         unique: true,   // Prevents duplicate usernames
         trim: true,     // REMOVES MESS: " Dave " becomes "Dave" automatically
-        minlength: 3    // Prevents "a" or "ab" as usernames
+        minlength: 5    // Prevents "a" or "ab" as usernames
     },
     roles: {
         User: {
